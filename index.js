@@ -28,7 +28,7 @@ server.use(cors(corsOptions));
 
 // We use Morgan to log our server
 // "tiny" The minimal output of the log the default light param
-server.use(morgan("tiny"));
+// server.use(morgan("tiny"));
 
 // Returns middleware that only parses json
 server.use(express.json());
