@@ -12,7 +12,7 @@ router.get("/", check.rules, async (req, res) => {
     // Await response server
     await book
         .getBooks()
-        // Result the all Products
+        // Result the all Books
         .then(books => res.json(books))
         // If any errors
         .catch(err => {

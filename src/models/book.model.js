@@ -1,20 +1,17 @@
+//Path
+const path = require("path");
 // Data Utilities
 const f = require("../shared/utilities");
 
-const filePath = f.booksJsonPath;
+const filePath = path.join(__dirname, f.booksJsonPath);
 
 let books = require(filePath);
 
-const getBooks = () => {
-    return new Promise((resolve, reject) => {
-        if (books.length === 0)
-            reject({
-                message: "No books available",
-                status: 202
-            });
+const h = require("../helpers/index.helper");
 
-        resolve(books).catch(err => reject(err));
-    });
+const getBooks = () => {
+    const buffer = h.readJson(books);
+    JSON.parse(buffer.toString());
 };
 
 module.exports = {
