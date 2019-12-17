@@ -63,5 +63,29 @@ router.post("/", check.createBook, check.rules, async (req, res) => {
         .catch(err => res.status(500).json({ message: err.message }));
 });
 
+// PUT Update a book
+router.put("/:asin", check.updateBook, check.rules, async (req, res) => {
+    // Request ID
+    const asin = req.params.asin;
+    // Await the book
+    await book
+        // Call model to update the product
+        .updateBook(asin, req.body)
+        // Response a message
+        .then(book =>
+            res.json({
+                message: `The book #${asin} has been updated`,
+                content: book
+            })
+        )
+        // Errors if any
+        .catch(err => {
+            if (err.status) {
+                res.status(err.status).json({ message: err.message });
+            }
+            res.status(500).json({ message: err.message });
+        });
+});
+
 // Routes
 module.exports = router;

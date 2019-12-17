@@ -1,7 +1,8 @@
 const { validateRules } = require("./validator.middleware");
-const { newBookRules } = require("./bookFieldsvalidator.middleware");
+const { newBookRules, updateBookRules } = require("./bookFieldsvalidator.middleware");
 
 module.exports = {
     rules: validateRules,
-    createBook: newBookRules
+    createBook: newBookRules,
+    updateBook: updateBookRules
 }

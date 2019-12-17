@@ -51,8 +51,31 @@ const createBook = newBook => {
     });
 };
 
+// PUT Update book
+const updateBook = (asin, newBook) => {
+    return new Promise((resolve, reject) => {
+        h.inArray(books, asin)
+            .then(book => {
+                const index = books.findIndex(b => b.asin == asin);
+                let updateId = { asin: book.asin };
+                const date = {
+                    created_at: book.created_at,
+                    // Update only the updated at date time
+                    updated_at: h.dateTime()
+                };
+                // Merging new data with old data
+                let updatedBook = { ...books[index], ...newBook };
+                books[index] = { ...updateId, ...updatedBook, ...date };
+                h.writeJson(filePath, books);
+                resolve(books[index]);
+            })
+            .catch(err => reject(err));
+    });
+};
+
 module.exports = {
     getBooks,
     getBook,
-    createBook
+    createBook,
+    updateBook
 };

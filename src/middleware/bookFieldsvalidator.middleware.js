@@ -1,5 +1,5 @@
 // Adding body module of express validator
-const { check, sanitizeBody } = require("express-validator");
+const { check, sanitizeBody, oneOf } = require("express-validator");
 
 // POST Book fields validations
 const newBookRules = [
@@ -22,7 +22,23 @@ const newBookRules = [
 ];
 
 // PUT Book fields validations
-const updateBookRules = [];
+const updateBookRules = [
+    oneOf([
+        check("title")
+            .exists()
+            .withMessage("Title is required"),
+        check("category")
+            .exists()
+            .withMessage("Category is required"),
+        check("price")
+            .isNumeric()
+            .withMessage("Price should be a number"),
+        check("img")
+            .exists()
+            .withMessage("Img is required"),
+        sanitizeBody("price").toFloat()
+    ])
+];
 
 // Exports the required methods
 module.exports = {
