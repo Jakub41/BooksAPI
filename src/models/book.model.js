@@ -73,9 +73,26 @@ const updateBook = (asin, newBook) => {
     });
 };
 
+// DELETE a Book
+const deleteBook = asin => {
+    return new Promise((resolve, reject) => {
+        // Check if it is part of an array
+        h
+            .inArray(books, asin)
+            // Filter the product id to delete and write
+            .then(() => {
+                books = books.filter(b => b.asin !== asin);
+                h.writeJson(filePath, books);
+                resolve();
+            })
+            .catch(err => reject(err));
+    });
+};
+
 module.exports = {
     getBooks,
     getBook,
     createBook,
-    updateBook
+    updateBook,
+    deleteBook
 };

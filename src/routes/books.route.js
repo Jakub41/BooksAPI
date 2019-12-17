@@ -87,5 +87,28 @@ router.put("/:asin", check.updateBook, check.rules, async (req, res) => {
         });
 });
 
+// DELETE a Book
+router.delete("/:asin", check.rules, async (req, res) => {
+    const asin = req.params.asin;
+    // Await server
+    await book
+        // Model delete product
+        .deleteBook(asin)
+        .then(book =>
+            // Response
+            res.json({
+                message: `The book #${asin} has been deleted`
+            })
+        )
+        // Any error
+        .catch(err => {
+            if (err.status) {
+                res.status(err.status).json({ message: err.message });
+            }
+            res.status(500).json({ message: err.message });
+        });
+});
+
+
 // Routes
 module.exports = router;
