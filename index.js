@@ -10,6 +10,8 @@ const bodyParser = require("body-parser");
 // CORS lib
 const cors = require("cors");
 
+const { corsOptions } = require("./src/config/corsOptions");
+
 // Morgan lib logger middleware https://www.npmjs.com/package/morgan
 // To log app activities a good way to keep track of what is going on
 // Useful also to the debug issues when an exception come ups
@@ -22,7 +24,7 @@ const server = express();
 const listEndpoints = require("express-list-endpoints");
 
 // Using CORS
-server.use(cors());
+server.use(cors(corsOptions));
 
 // We use Morgan to log our server
 // "tiny" The minimal output of the log the default light param
