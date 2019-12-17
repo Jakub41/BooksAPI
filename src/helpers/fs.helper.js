@@ -12,7 +12,7 @@ const writeToJSON = (filename, content) => {
 const readFromJSON = filename => {
     fs.readFile(filename, err => {
         if (err) console.log("reading the file caused an error => ", err);
-    }).toString();
+    });
 };
 
 module.exports = {

@@ -30,7 +30,10 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-validation": "^1.0.3",
+    "express-validator": "^6.3.0",
     "fs-extra": "^8.1.0",
-    "multer": "^1.4.2"
+    "multer": "^1.4.2",
+    "uuid": "^3.3.3",
+    "uuid-validate": "0.0.3"
   }
 }
