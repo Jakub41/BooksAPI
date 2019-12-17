@@ -1,4 +1,3 @@
-// Configuration of the APP
 const config = require("../config/config");
 
 // Books file JSON
