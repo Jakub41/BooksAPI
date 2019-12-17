@@ -39,5 +39,29 @@ router.get("/:asin", check.rules, async (req, res) => {
         });
 });
 
+// POST new Book
+router.post("/", check.createBook, check.rules, async (req, res) => {
+    // Book
+    const books = await book.getBooks();
+    const asinCheck = books.find(x => x.asin === req.body.asin);
+    if (asinCheck)
+        //if there is one, just abort the operation
+        res.status(500).send("ASIN should be unique");
+
+    // We create a new date time with helper
+    book
+        // Using the model to create a Book
+        .createBook(req.body)
+        .then(data =>
+            // OK product is created
+            res.status(201).json({
+                message: `The Book #${data.asin} has been created`,
+                content: data
+            })
+        )
+        // Error product not created
+        .catch(err => res.status(500).json({ message: err.message }));
+});
+
 // Routes
 module.exports = router;

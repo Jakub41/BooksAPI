@@ -9,6 +9,7 @@ let books = require(filePath);
 
 const h = require("../helpers/index.helper");
 
+// GET Books
 const getBooks = () => {
     return new Promise((resolve, reject) => {
         // Check if w have any products data
@@ -22,6 +23,7 @@ const getBooks = () => {
     });
 };
 
+// GET Book
 const getBook = asin => {
     return new Promise((resolve, reject) => {
         // We use the helper to check the data is present in the array
@@ -31,7 +33,26 @@ const getBook = asin => {
     });
 };
 
+// POST new Book
+const createBook = newBook => {
+    return new Promise((resolve, reject) => {
+        const date = {
+            created_at: h.dateTime(),
+            updated_at: h.dateTime()
+        };
+        // We build our query
+        newProduct = { ...date, ...newBook };
+        // We add t the array
+        books.push(newBook);
+        // Helper write to JSON the data to file
+        h.writeJson(filePath, books);
+        // Resolve if ok Reject with error if wrong
+        resolve(newBook).catch(err => reject(err));
+    });
+};
+
 module.exports = {
     getBooks,
-    getBook
+    getBook,
+    createBook
 };
