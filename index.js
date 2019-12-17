@@ -54,7 +54,7 @@ server.use(require("./src/routes/index.route"));
 console.log(listEndpoints(server));
 
 // Starting the server on env port
-server.listen(`${port}` || 4000, () => {
+server.listen(`${PORT}` || 4000, () => {
   // Showing a message to the console informing on which port is running
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on port ${PORT}`);
 });
