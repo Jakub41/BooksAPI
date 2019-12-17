@@ -15,13 +15,13 @@ const { corsOptions } = require("./src/config/corsOptions");
 // Morgan lib logger middleware https://www.npmjs.com/package/morgan
 // To log app activities a good way to keep track of what is going on
 // Useful also to the debug issues when an exception come ups
-const morgan = require("morgan");
+//const morgan = require("morgan");
 
 // Defining the server/app
 const server = express();
 
 // List routes
-const listEndpoints = require("express-list-endpoints");
+// const listEndpoints = require("express-list-endpoints");
 
 // Using CORS
 server.use(cors(corsOptions));
@@ -53,7 +53,7 @@ server.use(
 server.use(require("./src/routes/index.route"));
 
 // Endpoints list
-console.log(listEndpoints(server));
+// console.log(listEndpoints(server));
 
 // Starting the server on env port
 server.listen(`${PORT}` || 4000, () => {
