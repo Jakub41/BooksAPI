@@ -24,5 +24,20 @@ router.get("/", check.rules, async (req, res) => {
         });
 });
 
+// GET book
+router.get("/:asin", check.rules, async (req, res) => {
+    const id = req.params.asin;
+    await book
+        .getBook(id)
+        .then(book => res.json(book))
+        .catch(err => {
+            if (err.status) {
+                res.status(err.status).json({ message: err.message });
+            } else {
+                res.status(500).json({ message: err.message });
+            }
+        });
+});
+
 // Routes
 module.exports = router;

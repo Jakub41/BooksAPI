@@ -20,9 +20,18 @@ const getBooks = () => {
         }
         resolve(books).catch(err => reject(err));
     });
+};
 
+const getBook = asin => {
+    return new Promise((resolve, reject) => {
+        // We use the helper to check the data is present in the array
+        h.inArray(books, asin)
+            .then(book => resolve(book))
+            .catch(err => reject(err));
+    });
 };
 
 module.exports = {
-    getBooks
+    getBooks,
+    getBook
 };
