@@ -3,7 +3,7 @@ const path = require("path");
 // Data Utilities
 const f = require("../shared/utilities");
 
-const filePath = path.join(__dirname, f.booksJsonPath);
+const filePath = path.join(__dirname, "../db", f.booksJsonPath);
 
 let books = require(filePath);
 
