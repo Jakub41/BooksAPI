@@ -1,44 +1,50 @@
 // Adding body module of express validator
-const { check, sanitizeBody, oneOf } = require("express-validator");
+const { check, sanitizeBody } = require("express-validator");
 
 // POST Book fields validations
-const newBookRules = [
-    check("asin")
-        .exists()
-        .withMessage("You should specify the asin"),
-    check("title")
-        .exists()
-        .withMessage("Title is required"),
-    check("category")
-        .exists()
-        .withMessage("Category is required"),
-    check("price")
-        .isNumeric()
-        .withMessage("Price should be a number"),
-    check("img")
-        .exists()
-        .withMessage("Img is required"),
-    sanitizeBody("price").toFloat()
-];
-
-// PUT Book fields validations
-const updateBookRules = [
-    oneOf([
+const newBookRules = () => {
+    return [
+        check("asin")
+            .notEmpty()
+            .withMessage("You should specify the asin"),
         check("title")
-            .exists()
-            .withMessage("Title is required"),
+            .notEmpty()
+            .withMessage("The Title name is required"),
         check("category")
-            .exists()
+            .notEmpty()
             .withMessage("Category is required"),
         check("price")
             .isNumeric()
             .withMessage("Price should be a number"),
         check("img")
-            .exists()
+            .notEmpty()
             .withMessage("Img is required"),
         sanitizeBody("price").toFloat()
-    ])
-];
+    ];
+};
+// PUT Book fields validations
+const updateBookRules = () => {
+    return [
+        check("title")
+            .notEmpty()
+            .optional()
+            .withMessage("Title is empty"),
+        check("category")
+            .notEmpty()
+            .optional()
+            .withMessage("Category is required"),
+        check("price")
+            .isNumeric()
+            .notEmpty()
+            .optional()
+            .withMessage("Price should be a number"),
+        check("img")
+            .notEmpty()
+            .optional()
+            .withMessage("Img is required"),
+        sanitizeBody("price").toFloat()
+    ];
+};
 
 // Exports the required methods
 module.exports = {

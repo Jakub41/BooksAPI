@@ -45,7 +45,7 @@ server.use(express.json());
  */
 server.use(
   bodyParser.urlencoded({
-    extended: true
+    extended: false
   })
 );
 

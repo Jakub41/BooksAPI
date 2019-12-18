@@ -4,8 +4,11 @@ const express = require("express");
 const router = express.Router();
 // Product model
 const book = require("../models/book.model");
+// Validator
+const { validationResult } = require('express-validator');
 // Validations middleware
 const check = require("../middleware/index.middleware");
+
 
 // GET all books
 router.get("/", check.rules, async (req, res) => {
@@ -40,7 +43,7 @@ router.get("/:asin", check.rules, async (req, res) => {
 });
 
 // POST new Book
-router.post("/", check.createBook, check.rules, async (req, res) => {
+router.post("/", check.createBook(), check.rules, async (req, res) => {
     // Book
     const books = await book.getBooks();
     const asinCheck = books.find(x => x.asin === req.body.asin);
@@ -64,7 +67,7 @@ router.post("/", check.createBook, check.rules, async (req, res) => {
 });
 
 // PUT Update a book
-router.put("/:asin", check.updateBook, check.rules, async (req, res) => {
+router.put("/:asin", check.updateBook(), check.rules, async (req, res) => {
     // Request ID
     const asin = req.params.asin;
     // Await the book
