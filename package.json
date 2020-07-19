@@ -24,7 +24,7 @@
   "homepage": "https://github.com/Jakub41/BooksAPI#readme",
   "devDependencies": {
     "express-list-endpoints": "^4.0.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "morgan": "^1.9.1",
     "nodemon": "^2.0.2"
   },
